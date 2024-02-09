@@ -1,0 +1,460 @@
+---
+title: "Gesundheitsrisiken von Alkohol und Rauchen"
+---
+
+## Überblick
+
+<p> Die Auswirkungen von Alkoholkonsum und Rauchen auf den menschlichen Körper sind von entscheidender Bedeutung für die öffentliche Gesundheit und das Wohlbefinden. In Anbetracht der weitreichenden Folgen, die diese Verhaltensweisen mit sich bringen können, ist eine gründliche Untersuchung und Analyse der relevanten Daten unerlässlich.</p>
+
+<p>Diese Dokumentation stellt meinen Prozess der Auswertung eines Datensatzes über die Auswirkungen von Alkohol und Rauchen auf den menschlichen Körper dar. Von der Datennachbereitung bis zur Erstellung aussagekräftiger Diagramme verfolgte ich einen strukturierten Ansatz, um Einblicke in die Zusammenhänge zwischen dem Konsum dieser Substanzen und den potenziellen Gesundheitsrisiken zu gewinnen.  </p>
+
+<p>In diesem Dokument werde ich meinen methodischen Ansatz erläutern und die Ergebnisse meiner Untersuchung präsentieren. Ziel ist es, ein umfassendes Verständnis der Auswirkungen von Alkohol und Rauchen auf den menschlichen Körper zu vermitteln und auf dieser Grundlage mögliche Maßnahmen zur Verbesserung der öffentlichen Gesundheit zu ermitteln.
+</p>
+
+## Datensatz
+
+<p>Dieser Datensatz wurde vom Nationalen Krankenversicherungsdienst in Korea erhoben. Alle persönlichen Informationen und sensiblen Daten wurden ausgeschlossen. Folgend werden die Angaben der Spalten Erklärt: </p>
+
+1. <b>sex</b> steht für das Geschlecht der Person - männlich oder weiblich
+2. <b>age:</b>In der ursprünglichen Studie wurde das Alter in 5-Jahres-Intervalle unterteilt, d. h. 20-24 Jahre, 25-29 Jahre, ..., 85+ Jahre. Diese Intervalle wurden dann in numerische Werte umgewandelt, indem die untere Grenze des Intervalls genommen wurde. (z. B. 20-24 Jahre -> 20 Jahre)
+3. <b>height</b> gibt die Größe der Person in 5-cm-Schritten an
+4. <b>weight</b> stellt das Gewicht der Person in 5kg-Schritten dar
+5. <b>waist</b> steht für den Umfang der Taille der Person
+6. <b>sight_left</b> steht für die Sehschärfe des linken Auges der Person. Die Sehschärfe misst die Fähigkeit des Auges, Formen und Objektdetails in einer bestimmten Entfernung zu unterscheiden. Sie reicht von 0,1 bis 1,5, wobei Werte <0,1 auf 0,1 verschoben werden
+7. <b>sight_right</b> steht für die Sehschärfe des rechten Auges der Person.
+8. <b>hear_left</b> misst das Gehör auf dem linken Ohr der Person, wobei 1 für ein normales und 2 für ein abnormales Gehör steht
+9. <b>hear_right</b> misst das Gehör auf dem rechten Ohr der Person mit dem gleichen Klassifizierungssystem wie hear_left.
+10. Der <b>SBP</b> misst den höchsten bei einer Person gemessenen systolischen Blutdruck in mmHg. Der systolische Blutdruck misst den Druck in den Arterien, wenn das Herz schlägt
+11. Der <b>DBP</b> misst den diastolischen Blutdruck, der von der Person selbst gemessen wird, in mmHg. Der diastolische Blutdruck misst den Druck in den Arterien, wenn das Herz zwischen den Schlägen ruht
+12. Der <b>BLDS</b> misst den Nüchternblutzucker der Person in mg/dL. Dies entspricht der Glukosekonzentration pro 100 ml Blut vor dem Verzehr einer Mahlzeit
+13. <b>tot_chole</b> misst die Gesamtkonzentration von (Ester- und Nicht-Ester-) Cholestorol in der Person, in mg/dL
+14. <b>HDL_chole</b> misst die Gesamtkonzentration von Cholestorol im HDL-Bereich (High Density Lipoprotein) der Person in mg/dL. HDL-Cholestorol, auch "gutes Cholestorol" genannt, absorbiert Cholestorol im Blut und transportiert es zurück zur Leber, die es dann aus dem Körper spült. Beachten Sie, dass höhere HDL-Cholestorol-Werte das Risiko für Herzkrankheiten senken können.
+15. <b>LDL_chole</b> misst die Gesamtkonzentration von Cholestorol im LDL-Bereich (Lipoprotein niedriger Dichte) in mg/dL. LDL-Cholestorol, auch schlechtes Cholestorol genannt, macht den größten Teil des Cholestorols im Körper aus. Hohe Werte können das Risiko für Herzkrankheiten und Schlaganfälle erhöhen.
+16. <b>triglyceride</b> misst die Gesamtkonzentration von Triglyceriden im Blut einer Person in mg/dL. Triglyceride sind eine Art von Lipiden (d. h. Fett), die in unserem Blut zirkulieren und in der Regel aus Lebensmitteln stammen, die wir verzehren
+17. <b>hemoglobin</b> misst die Gesamtkonzentration von Hämoglobin im Blut einer Person in g/dL. Hämoglobin ist ein Protein in unseren roten Blutkörperchen, das Sauerstoff transportiert
+18. <b>urine_protein</b> misst die Menge an Eiweiß im Urin einer Person. Ein hoher Eiweißgehalt im Urin, auch Proteinurie genannt, kann ein Anzeichen für viele Gesundheitsprobleme sein, z. B. Herzversagen und Nierenprobleme. source. Es ist unklar, was die Kodierungen der Bezeichnungen (1(-), 2(+/-), 3(+1), 4(+2), 5(+3), 6(+4)) für diese Variable bedeuten, obwohl man vermuten könnte, dass sie sich auf die Anzahl der Standardabweichungen vom Mittelwert beziehen, die der Wert in der Merkmalsverteilung aufweist
+19. <b>serum_creatine</b> misst die Konzentration von Kreatinin im Serum (das sich im Blut befindet) einer Person in mg/dL. Kreatinin ist ein Abfallprodukt von Kreatin, das hauptsächlich zur Energieversorgung der Muskeln produziert wird. Normalerweise wird es von den Nieren vollständig abgebaut; wenn die Nierenfunktion gestört ist, steigt die Kreatininkonzentration an. Normale Werte liegen bei etwa 0,8-2,7 mg/dL
+20. <b>SGOT_AST</b> misst den SGO (Glutamat-Oxaloacetat-Transaminase)-AST (Aspartat-Transaminase)-Wert in IU/L. Dies sind Werte in Bluttests, die die Leistung von Leber, Herz und anderen Organen messen. Insbesondere wenn diese Organe geschädigt sind, steigt der Wert an. Normale Werte liegen bei 0-40 IU/L
+21. <b>SGOT_ALT</b> misst den SGOT (Glutamat-Oxaloacetat-Transaminase) - ALT (Alanin-Transaminase) Wert in IU/L, das sind Werte in Bluttests, die die Leberleistung quantifizieren. Insbesondere, wenn diese geschädigt ist, steigt der Wert an. Normale Werte liegen bei 0-40 IU/L
+22. <b>gamma_GTP</b> misst den Gamma-GTP (y-Glutamyltranspeptidase)-Wert in IU/L, also Werte, die die Leberfunktion im Gallendiktat quantifizieren. Normale Werte liegen bei Männern bei 11-63 IU/L und bei Frauen bei 8-35 IU/L
+23. <b>SMK_STAT_TYPE_CD</b> misst den Raucherstatus der Person, wobei 1 bedeutet, dass sie nie geraucht hat, 2 bedeutet, dass sie geraucht hat, aber aufgehört hat, und 3 bedeutet, dass sie noch raucht
+24. <b>DRK_YN</b> ist ein Kennzeichen, das angibt, ob die Person ein Trinker ist oder nicht
+
+
+<p> Zuerst wurden die benötigten Libaries importiert, in diesem Fall Pandas und Altair sowie der Datensatz geladen für die darauffolgende Analyse.</p>
+<div style="background-color: #f2f2f2; padding: 10px; border-radius: 5px;">
+    <code>
+        import pandas as pd
+        import altair as alt
+
+        # Pfadeinstellung für lokale Excel-Datei
+        lokaler_pfad = '/Users/leamaier/Desktop/Studium/WI/6. Semester/Data Storytelling/Aufklärungskampagne/smoking_driking_dataset_Ver01.csv'
+
+        # DataFrame aus der CSV-Datei erstellen
+        init_df = pd.read_csv('smoking_driking_dataset_Ver01.csv') 
+    </code>
+</div>
+
+<p> Da der Datensatz 991347 Einträge hat, habe ich ihn verkleinert für eine bessere Laufzeit. Dies habe ich gemacht, indem in ersten Schritt die Spalten Gruppiert habe nach Alter und anschließend in einem leeren DataFrame 300 Einträge jedes Alters gespeichert habe.</p>
+
+<div style="background-color: #f2f2f2; padding: 10px; border-radius: 5px;">
+    <code>
+        # Gruppiere den DataFrame nach der 'age'-Spalte
+        grouped_df = init_df.groupby('age')
+
+        # Erstelle eine leere DataFrame, um die begrenzten Einträge zu speichern
+        df = pd.DataFrame()
+
+        # Iteriere durch jede Gruppe und füge die ersten 300 Einträge hinzu
+        for _, group in grouped_df:
+            df = df._append(group.head(300))
+    </code>
+<div>
+
+## Hinzufügen Verhältnissen/Kombinationen von Merkmalen
+
+<p>Eine Möglichkeit, Merkmale im Datensatz zu kombinieren, besteht darin, Verhältnisse oder Kombinationen von Merkmalen einzuführen.
+
+Ich habe einige Hilfsfunktionen eingeführt, anhand derer ich die Verhältnisse oder Formeln berechnen kann und anschließend habe ich sie dem Datensatz hinzugefügt: </p>
+
+<div style="background-color: #f2f2f2; padding: 10px; border-radius: 5px;">
+    <code>
+        def get_bmi(row):
+            weight = row["weight"]
+            height_cm = row["height"]
+            height_meter = height_cm / 100
+            bmi = weight / (height_meter ** 2)
+            return bmi
+
+        def get_blood_pressure_ratio(row):
+            sbp = row["sbp"]
+            dbp = row["dbp"]
+            return sbp / dbp
+
+        def get_hdl_cholesterol_ratio(row):
+            hdl_chole = row["hdl_chole"]
+            total_chole = row["tot_chole"]
+            return hdl_chole / total_chole
+
+        def get_ldl_cholesterol_ratio(row):
+            ldl_chole = row["ldl_chole"]
+            total_chole = row["tot_chole"]
+            return ldl_chole / total_chole
+
+        df["bmi"] = df.apply(get_bmi, axis=1)
+        df["bp_ratio"] = df.apply(get_blood_pressure_ratio, axis=1)
+        df["hdl_ratio"] = df.apply(get_hdl_cholesterol_ratio, axis=1)
+        df["ldl_ratio"] = df.apply(get_ldl_cholesterol_ratio, axis=1)
+    </code>
+</div>
+
+## Hinzufügen "normalen" Kodierungen für Merkmale
+
+<p>Viele der Spaltenbeschreibungen aus der Originalquelle führen "normale" Bereiche für viele der numerischen Variablen auf. Ein natürliches Merkmal, das ich zu den Daten hinzufügen kann, waren also Markierungen, die anzeigen, ob die Werte der Daten in diese normalen Bereiche fallen.</p>
+
+<div style="background-color: #f2f2f2; padding: 10px; border-radius: 5px;">
+    <code>
+        def classify_eyesight(val):
+            if val > 1: # > 20/20 eyesight
+                return "Good"
+            elif val > 0.5: # > 20/40 eyesight
+                return "Average"
+            elif val > 0.25: # > 20/80 eyesight
+                return "Poor"
+            else:
+                return "Very Poor"
+
+        def classify_blood_pressure(row):
+            sbp = row["sbp"]
+            dbp = row["dbp"]
+            if sbp < 120 and dbp < 80:
+                return "Normal"
+            elif sbp < 130 and dbp < 80:
+                return "Elevated"
+            elif sbp < 140 and dbp < 90:
+                return "Hypertension Stage 1"
+            elif sbp < 180 and dbp < 120:
+                return "Hypertension Stage 2"
+            else:
+                return "Hypertensive Crisis"
+
+        def classify_blood_glucose(row):
+            blood_glucose = row["blds"]
+            if blood_glucose < 100:
+                return "Normal"
+            elif blood_glucose < 125:
+                return "Pre-Diabetes"
+            else:
+                return "Diabetes"
+
+        def classify_serum_creatinine(row):
+            serum_creatinine = row["serum_creatinine"]
+            if serum_creatinine < 2.7:
+                return "Normal"
+            else:
+                return "Abnormal"
+
+        def classify_sgot_ast(row):
+            sgot_ast = row["sgot_ast"]
+            if sgot_ast < 40:
+                return "Normal"
+            else:
+                return "Abnormal"
+
+        def classify_sgot_alt(row):
+            sgot_alt = row["sgot_alt"]
+            if sgot_alt < 40:
+                return "Normal"
+            else:
+                return "Abnormal"
+
+        def classify_gamma_gtp(row):
+            gamma_gtp = row["gamma_gtp"]
+            sex = row["sex"]
+            if sex == "Male":
+                if gamma_gtp >= 11 and gamma_gtp <= 63:
+                    return "Normal"
+                else:
+                    return "Abnormal"
+            else:
+                if gamma_gtp >= 8 and gamma_gtp <= 35:
+                    return "Normal"
+                else:
+                    return "Abnormal"
+
+
+            # Klassen für eyesight
+            df["sight_left_class"] = df["sight_left"].apply(classify_eyesight)
+            df["sight_right_class"] = df["sight_right"].apply(classify_eyesight)
+
+            # Klassen für Blutdruck, Blutzucker, Serumkreatinin und Leberwerte
+            df["blood_pressure_class"] = df.apply(classify_blood_pressure, axis=1)
+            df["blood_glucose_class"] = df.apply(classify_blood_glucose, axis=1)
+            df["serum_creatinine_class"] = df.apply(classify_serum_creatinine, axis=1)
+            df["sgot_ast_class"] = df.apply(classify_sgot_ast, axis=1)
+            df["sgot_alt_class"] = df.apply(classify_sgot_alt, axis=1)
+            df["gamma_gtp_class"] = df.apply(classify_gamma_gtp, axis=1)
+
+    </code>
+</div>
+
+## Antwortvariablen umbenennen
+
+<p>Um die Antwortvariablen anschaulicher zu machen, werde ich hier die Werte umbenennen: </p>
+
+<div style="background-color: #f2f2f2; padding: 10px; border-radius: 5px;">
+    <code>
+        response_feature_drinking = 'drk_yn'
+        response_feature_smoking = 'smk_stat_type_cd'
+
+        smoking_values_dict = {
+            1: 'Never Smoked',
+            2: 'Smoked But Quit',
+            3: 'Is Smoking'
+        }
+
+        for k, v in smoking_values_dict.items():
+            df.loc[df[response_feature_smoking] == k, response_feature_smoking] = v
+
+        drinking_values_dict = {
+            "Y": 'Drinker',
+            "N": "Non-Drinker"
+        }
+
+        for k, v in drinking_values_dict.items():
+            df.loc[df[response_feature_drinking] == k, response_feature_drinking] = v
+    </code>
+</div>
+
+## Getrennte kategorische/numerische + erklärende/antwortende Merkmale
+
+<p>Für die künftigen Schritte will ich die kategorischen und numerischen Merkmale sowie die erklärenden und antwortenden Merkmale explizit auflisten.</p>
+
+<div style="background-color: #f2f2f2; padding: 10px; border-radius: 5px;">
+    <code>
+        categorical_features = ['hear_left', 'hear_right',
+                        'sex', 'urine_protein', 'drk_yn', 'smk_stat_type_cd',
+                       'sight_left_class', 'sight_right_class',
+                       'blood_pressure_class', 'blood_glucose_class', 'serum_creatinine_class',
+                       'sgot_ast_class', 'sgot_alt_class', 'gamma_stp_class']
+
+        numeric_features = ['age', 'height', 'weight', 'waistline', 'sight_left',
+            'sight_right', 'sbp', 'dbp', 'blds',
+            'tot_chole', 'hdl_chole', 'ldl_chole', 'triglyceride', 'hemoglobin',
+            'serum_creatinine', 'sgot_ast', 'sgot_alt',
+            'gamma_gtp', 'bp_ratio', 'hdl_ratio', 'ldl_ratio', 'bmi']
+
+        explanatory_features = set(categorical_features + numeric_features).difference(set([response_feature_drinking, response_feature_smoking]))
+    </code>
+</div>
+
+## Rauchgewohnheiten
+
+<p> Um einen ersten Überblick des Datensatzes zu bekommen, was die Rauchgewohnheiten angeht habe ich ein Balkendiagramm erstellt. Dieses ist unter den Geschlechtern aufgeteilt und zeigt die Häufigkeit der jeweiligen Merkmalsausprägungen. Zuerst zeige ich den code den ich dazu geschrieben habe und anschließend das Diagramm was hierbei herauskam: <p>
+
+<div style="background-color: #f2f2f2; padding: 10px; border-radius: 5px;">
+    <code>
+
+        chart = alt.Chart(df).mark_bar(
+            cornerRadiusTopLeft=3,
+            cornerRadiusTopRight=3
+        ).encode(
+            x=alt.X('sex:O', sort='-y', axis=alt.Axis(title="Sex", titleAnchor="start", labelAngle=0)),
+            y=alt.Y('count():Q', axis=alt.Axis(title="Count", titleAnchor="end", grid=False)),
+            color=alt.Color('smk_stat_type_cd:N', legend=alt.Legend(title="Rauchkonsum"))
+        ).properties(
+            title='Rauchkonsum nach Geschlecht',
+            width=400,
+            height=300
+        ).configure_title(
+            fontSize=20,
+            font='Arial',
+            anchor='start',
+            color='black'
+        ).configure_axis(
+            labelFontSize=14,
+            titleFontSize=16
+        ).configure_view(strokeWidth=0)
+
+        chart
+    </code>
+</div>
+
+![Rauchkonsum der Geschlechter](Rauchkonsum.png)
+
+<p> Zu erkennen in diesem Diagramm ist, das bei den Männern die Ausprägungen relativ gleichverteilt sind. Jedoch bei den Frauen die Mehrheit noch nie geraucht hat. 
+
+## Alkoholkonsum
+<p> Um genauso einen besseren Einblick in die Gewohnheiten zu bekommen was den Alkohol betrifft, habe ich zwei Pie Charts erstellt jeweils eins für die Geschlechter. Hier bin ich so vorgegangen das ich das DataFrame gefiltert habe je nach dem Geschlecht und es dann in einem PieChart abbilde bezogen auf den Alkoholkonsum. </p>
+<div style="background-color: #f2f2f2; padding: 10px; border-radius: 5px;">
+    <code>
+        #Alkoholkonsum Männer
+        df_male = df[df['sex'] == 'Male']
+
+        chart = alt.Chart(df_male).mark_arc().encode(
+            theta='count()',
+            color=alt.Color('drk_yn:N', legend=alt.Legend(title="Alkoholkonsum"))
+        ).properties(
+            title='Alkoholkonsum Männer',
+            width=400,
+            height=300
+        ).configure_title(
+            fontSize=20,
+            font='Arial',
+            anchor='start',
+            color='black'
+        ).configure_axis(
+            labelFontSize=14,
+            titleFontSize=16
+        ).configure_view(strokeWidth=0)
+
+        chart
+
+        #Alkoholkonsum Frauen
+        df_female = df[df['sex'] == 'Female']
+
+        chart = alt.Chart(df_female).mark_arc().encode(
+            theta='count()',
+            color=alt.Color('drk_yn:N', legend=alt.Legend(title="Alkoholkonsum Frauen"))
+        ).properties(
+            title='Alkoholkonsum Frauen',
+            width=400,
+            height=300
+        ).configure_title(
+            fontSize=20,
+            font='Arial',
+            anchor='start',
+            color='black'
+        ).configure_axis(
+            labelFontSize=14,
+            titleFontSize=16
+        ).configure_view(strokeWidth=0)
+
+        chart
+    </code>
+</div>
+
+
+
+![Alkoholkonsum der Männer](alkoholM.png)
+![Alkoholkonsum der Frauen](alkoholF.png)
+
+
+<p> Daraus konnte ich dann erkennen, das auch hier der Konsum der Männer höher als der der Frauen ist, jedoch nicht ganz so einprägend wie bei dem Rauchkonsum. </p>
+
+## Zusammenhänge 
+
+<p> Um die Zusammenhänge der beiden Konsume festzustellen habe ich eine Heatmap erstellt. Hier wollte ich erfahren ob ein Konsum einen Einfluss auf den anderen hat. </p>
+
+![Zusammenhang der Gewohnheiten](zusammenhang.png)
+
+<p> In der Heatmap ist zu deuten, dass es einen starken Zusammenhang gibt zwischen den Ausprägungen nicht rauchen und keinen Alkohol konsumieren. Das bedeutet das es wahrscheinlich ist dass wenn eine Person in der Studie noch nie geraucht hat sie größtenteils auch keinen Alkohol trinkt.</p>
+<p> Es ist noch ein geringer Zusammenhang zu erkennen zwischen noch nie geraucht aber Alkoholkonsument. Daraus kann man schließen das es wahrscheinlicher ist das jemand Alkohol trinkt auch wenn noch nie graucht worden ist. </p>
+
+
+## Bludruck
+
+<p> Der Blutdruck ist einer vieler gesundheitlicher Merkmale die von den Gewohnheiten beeinflusst werden können, deshalb habe ich mich für ihn innerhalb dieser Studie interessiert. Vorab habe ich ja die neue Klasse erstellt so kann es in fünf verschiedene  eingeteilt werden von Normal bis Hypertensive Krise. Vorab habe ich den Datensatz gefiltert damit nur noch die Personen in betracht gezogen werden die beide Gewohnheiten umsetzte.</p>
+
+<div style="background-color: #f2f2f2; padding: 10px; border-radius: 5px;">
+    <code>
+        # DataFrame filtern
+        filtered_df = df[(df['drk_yn'] == 'Drinker') & (df['smk_stat_type_cd'] == 'Is Smoking')]
+
+        average_blood_pressure = filtered_df.groupby('blood_pressure_class').agg({
+            'sbp': 'mean',
+            'dbp': 'mean'
+        }).reset_index()
+
+        # Erstellen Sie das Balkendiagramm
+        chart_average_blood_pressure = alt.Chart(average_blood_pressure).mark_bar().encode(
+            x='blood_pressure_class:N',
+            y=alt.Y('mean(sbp):Q', title='Durchschnittlicher systolischer Blutdruck'),
+            color='blood_pressure_class:N'
+        ).properties(
+            title='Durchschnittlicher Blutdruck',
+            width=500,
+            height=300
+        )
+
+        chart_average_blood_pressure
+    </code>
+</div>
+
+![Durchscnittlicher Blutdruck](blutdruck.png)
+
+<p>In dieser Abbildung ist zu erkennen, dass die Blutdruck Klasse Hypertensive Krise am ausgeprägtesten ist und der Normale Blutdruck am geringsten und Personen die rauchen und Alkohol konsumieren. Unterhalb werden nochmal die Klassen genauer beschrieben:</p>
+
+<p> Normal: sbp < 120 and dbp < 80
+
+Elevated: sbp < 130 and dbp < 80
+
+Hypertension Stage 1: sbp < 140 and dbp < 90
+
+Hypertension Stage 2: sbp < 180 and dbp < 120
+
+Hypertensive Crisis: alles darüber </p>
+
+## Blutzucker
+
+<p> Da der Blutzucker ein Indiz für Diabetes sein kann und dieser auch stark von dem Konsum von Zigaretten oder Alkohol beeinflusst werden kann, habe ich mich dafür interessiert wie er sich über die Lebensjahre entwickelt von Personen die beides zu tun Pflegen. Deshalb entschied ich mich für ein Line Chart, indem in dann mit einer Linie kennzeichne wo der normale Blutzuckerspiegel liegen sollte.</p>
+
+<div style="background-color: #f2f2f2; padding: 10px; border-radius: 5px;">
+    <code>
+
+        # Durchschnittlichen Blutdzucker pro Alter berechnen
+        average_blds = filtered_df.groupby("age")["blds"].mean().reset_index()
+
+        # Line Chart erstellen
+        line_chart = alt.Chart(average_blds).mark_line().encode(
+            x=alt.X("age:O", title="Alter"),
+            y=alt.Y("blds:Q", 
+                    title="Durchschnittlicher Blutzucker", 
+                    scale=alt.Scale(domain=[90, 120])
+                    ),
+            tooltip=["age:O", "blds:Q"],
+        ).properties(width=700, height=400)
+
+        # Horizontale Linie bei y-Wert 100 hinzufügen
+        rule_line = alt.Chart(pd.DataFrame({'y': [100]})).mark_rule(color='red', strokeWidth=2).encode(y='y:Q')
+
+        # Diagramm anzeigen
+        line_chart + rule_line
+    </code>
+</div>
+
+![Durchscnittlicher Blutzucker](blutzucker.png)
+
+<p>Unterhalb der Roten Linie zeigt sich ein Blutzucker der sich im gesunden Bereich befindet. Ab dem 40 Lebensjahr sieht man einen deutlichen Anstieg des Durchschnittlichen Spiegels. </p>
+
+## Leberfunktion
+
+<p> Ein weiteres gesundheitliches Merkmal für dessen Auswirkung von Alokol und den Konsum von Zigaretten ich mich interessiert habe ist der der Leberfunktion. in dem DataFrame gibt die Spalte gamma_gtp_class die ich erstellt habe an ob die Funktion der Gallenwege Normal oder Abnormal ist. Auch hier betrachte ich Personen die beide Gewohnheiten umsetzten um das größte Ausmaß sehen zu können. Dies wollte ich anhand eines Balkendiagramms verdeutlichen: </p>
+
+<div style="background-color: #f2f2f2; padding: 10px; border-radius: 5px;">
+    <code>
+        average_gamma_gtp = filtered_df.groupby('gamma_gtp_class').agg({
+            'gamma_gtp': 'mean'
+        }).reset_index()
+
+        # Erstellen Sie das Balkendiagramm für den durchschnittlichen Leberfunktion
+        chart_average_blood_glucose = alt.Chart(average_gamma_gtp).mark_bar().encode(
+            x='gamma_gtp_class:N',
+            y=alt.Y('mean(gamma_gtp):Q', title='Durchschnittliche Leberfunktion'),
+            color='gamma_gtp_class:N'
+        ).properties(
+            title='Durchschnittliche Leberfunktion',
+            width=400,
+            height=300
+        )
+
+        chart_average_blood_glucose
+    </code>
+</div>
+
+![Durchscnittliche Leberfunktion](leberfunktion.png)
+
+<p> Hier ist die Auswikungen der beiden Konsume auch deutlich zu erkennen, die Merheit liegt im Abnormalen Bereich. Das bedeutet das bei den meisten Personen die Leberfunktion nicht ausreichend genug ist beziehungsweise stark beeinträchtigt.</p>
+
+## Anregungen
+
